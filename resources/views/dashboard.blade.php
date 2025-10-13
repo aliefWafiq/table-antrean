@@ -78,9 +78,9 @@
 @endsection
 @push('scripts')
 <script>
-    const apiUrl = 'https://operator-production-6d52.up.railway.app/api/broadcasting/auth';
+    const apiUrl = 'https://operator-production-6d52.up.railway.app/api/antrean-terkini';
 
-    function updateStatusAntrean(data) {
+    function updateTampilan(antreanSekarang) {
         const displayNomorSekarang = document.getElementById('display-antrean-sekarang');
         const tabelBody = document.getElementById('tabel-antrean');
 
@@ -89,33 +89,37 @@
             barisAktifSebelumnya.classList.remove('table-success');
         }
 
-        if (data.antrean_sekarang) {
-            displayNomorSekarang.innerText = data.antrean_sekarang.tiketAntrean;
+        if (antreanSekarang) {
+            displayNomorSekarang.innerText = antreanSekarang.tiketAntrean;
 
-            const barisAktifSekarang = document.getElementById('antrean-' + data.antrean_sekarang.id);
+            const barisAktifSekarang = document.getElementById('antrean-' + antreanSekarang.id);
             if (barisAktifSekarang) {
-                barisAktifSekarang.classList.add('table-success'); 
+                barisAktifSekarang.classList.add('table-success');
             }
         } else {
             displayNomorSekarang.innerText = '---';
         }
     }
 
-    async function fetchAndUpdate() {
+    async function fetchAwal() {
         try {
             const response = await fetch(apiUrl);
-            const data = await response.json();
-            updateStatusAntrean(data);
+            const data = await response.json(); 
+
+            updateTampilan(data.antrean_sekarang); 
         } catch (error) {
-            console.error('Gagal mengambil data antrean:', error);
+            console.error('Gagal mengambil data awal:', error);
+            document.getElementById('display-antrean-sekarang').innerText = 'Error';
         }
     }
 
-    document.addEventListener('DOMContentLoaded', fetchAndUpdate);
-    window.Echo.channel('antrean-channel')
-        .listen('.AntreanDipanggil', (event) => {
+    document.addEventListener('DOMContentLoaded', fetchAwal);
+
+    window.Echo.channel('antrean-display-channel')
+        .listen('UpdateDisplayAntrean', (event) => { 
             console.log('Update antrean diterima:', event);
-            fetchAndUpdate();
+
+            updateTampilan(event.antrean); 
 
             // const audio = new Audio('/suara/notifikasi.mp3');
             // audio.play();
