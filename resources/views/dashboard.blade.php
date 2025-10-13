@@ -119,6 +119,8 @@
         .listen('UpdateDisplayAntrean', (event) => { 
             console.log('Update antrean diterima:', event);
 
+            const antreanData = event.dataAntreanTerkini;
+
             updateTampilan(event.antrean); 
 
             // const audio = new Audio('/suara/notifikasi.mp3');
