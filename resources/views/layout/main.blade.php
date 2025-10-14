@@ -17,10 +17,15 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('style/style.css') }}">
 </head>
 
 <body>
     <div class="wrapper">
+        <header class="header-antrean-formal py-4">
+            <img src="{{ asset('img/logo.png') }}" alt="Logo" class="logo">
+            <h1 class="nama-instansi">Pengadilan Agama Kabupaten Bengkalis</h1>
+        </header>
 
         @yield('content')
 

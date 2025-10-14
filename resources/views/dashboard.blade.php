@@ -1,31 +1,16 @@
 @extends('layout.main')
 @section('content')
-<div class="p-5">
+<div class="p-lg-5 p-4">
     <section class="content">
         <div class="container-fluid">
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Antrean Sedang Dipanggil</h3>
-                        </div>
-                        <div class="card-body text-center">
-                            <h1 id="display-antrean-sekarang" class="display-1 font-weight-bold text-primary">
-                                {{ $antreanSekarang->tiketAntrean ?? '---' }}
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <hr>
                             <div class="d-flex flex-column flex-lg-row align-items-center">
-                                <div class="col-12 col-sm-8 py-2">
-                                    <h3 class="card-title">List Antrean Hari Ini</h3>
+                                <div class="col-12 col-sm-8 py-2 d-flex flex-column flex-lg-row">
+                                    <span class="card-title">Daftar Perkara Hari Ini</span>
+                                    <span class="card-title mx-lg-2">{{ now()->format('d F Y') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -34,9 +19,9 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
-                                        <th>Nama Lengkap</th>
                                         <th>Nomor Perkara</th>
                                         <th>Tiket Antrean</th>
+                                        <th>Jam Sidang</th>
                                         <th>Tanggal Sidang</th>
                                     </tr>
                                 </thead>
@@ -44,9 +29,9 @@
                                     @foreach ($data as $x)
                                     <tr id="antrean-{{ $x->id }}" data-tanggal="{{ \Carbon\Carbon::parse($x->tanggal_sidang)->format('Y-m-d') }}" class="{{ ($antreanSekarang && $antreanSekarang->id == $x->id) ? 'table-success' : '' }}">
                                         <td class="text-center py-3">{{ $loop->iteration }}</td>
-                                        <td class="py-3">{{ $x->namaLengkap }}</td>
                                         <td class="py-3">{{ $x->noPerkara }}</td>
                                         <td class="py-3">{{ $x->tiketAntrean }}</td>
+                                        <td class="py-3">{{ \Carbon\Carbon::parse($x->jam_perkiraan)->format('H:i') }}</td>
                                         <td class="py-3">{{ \Carbon\Carbon::parse($x->tanggal_sidang)->format('d F Y') }}</td>
                                     </tr>
                                     @endforeach
@@ -64,7 +49,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         function updateTampilan(antreanSekarang) {
-            const displayNomorSekarang = document.getElementById('display-antrean-sekarang');
             const tabelBody = document.getElementById('tabel-antrean');
 
             const barisAktifSebelumnya = tabelBody.querySelector('tr.table-success');
@@ -73,14 +57,10 @@
             }
 
             if (antreanSekarang) {
-                displayNomorSekarang.innerText = antreanSekarang.tiketAntrean;
-
                 const barisAktifSekarang = document.getElementById('antrean-' + antreanSekarang.id);
                 if (barisAktifSekarang) {
                     barisAktifSekarang.classList.add('table-success');
                 }
-            } else {
-                displayNomorSekarang.innerText = '---';
             }
         }
 
