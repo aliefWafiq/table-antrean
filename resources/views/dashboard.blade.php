@@ -78,7 +78,6 @@
 @endsection
 @push('scripts')
 <script>
-    // const apiUrl = 'https://operator-production-6d52.up.railway.app/api/antrean-terkini';
     document.addEventListener('DOMContentLoaded', function() {
         function updateTampilan(antreanSekarang) {
             const displayNomorSekarang = document.getElementById('display-antrean-sekarang');
@@ -101,28 +100,14 @@
             }
         }
 
-        // async function fetchAwal() {
-        //     try {
-        //         const response = await fetch(apiUrl);
-        //         const data = await response.json(); 
-
-        //         updateTampilan(data.antrean_sekarang); 
-        //     } catch (error) {
-        //         console.error('Gagal mengambil data awal:', error);
-        //         document.getElementById('display-antrean-sekarang').innerText = 'Error';
-        //     }
-        // }
-
-        // document.addEventListener('DOMContentLoaded', fetchAwal);
-
         window.Echo.channel('antrean-display-channel')
             .listen('UpdateDisplayAntrean', (event) => {
                 console.log('Update antrean diterima:', event);
                 console.log("DAPAT NIIIIIII")
 
-                const antreanData = event.antrean;
+                const antreanData = event.dataAntreanTerkini;
 
-                updateTampilan(event.antrean);
+                updateTampilan(event.dataAntreanTerkini);
 
                 // const audio = new Audio('/suara/notifikasi.mp3');
                 // audio.play();
