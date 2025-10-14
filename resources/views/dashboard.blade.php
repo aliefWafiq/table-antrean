@@ -28,7 +28,7 @@
                         </div>
                         <div class="card-body text-center">
                             <h1 id="display-antrean-sekarang" class="display-1 font-weight-bold text-primary">
-                                ---
+                                {{ $antreanSekarang->tiketAntrean ?? '---' }}
                             </h1>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                                 </thead>
                                 <tbody id="tabel-antrean">
                                     @foreach ($data as $x)
-                                    <tr id="antrean-{{ $x->id }}" data-tanggal="{{ \Carbon\Carbon::parse($x->tanggal_sidang)->format('Y-m-d') }}">
+                                    <tr id="antrean-{{ $x->id }}" data-tanggal="{{ \Carbon\Carbon::parse($x->tanggal_sidang)->format('Y-m-d') }}" class="{{ ($antreanSekarang && $antreanSekarang->id == $x->id) ? 'table-success' : '' }}">
                                         <td class="text-center py-3">{{ $loop->iteration }}</td>
                                         <td class="py-3">{{ $x->namaLengkap }}</td>
                                         <td class="py-3">{{ $x->noPerkara }}</td>
@@ -78,7 +78,7 @@
 @endsection
 @push('script')
 <script>
-    const apiUrl = 'https://operator-production-6d52.up.railway.app/api/antrean-terkini';
+    // const apiUrl = 'https://operator-production-6d52.up.railway.app/api/antrean-terkini';
 
     function updateTampilan(antreanSekarang) {
         const displayNomorSekarang = document.getElementById('display-antrean-sekarang');
@@ -101,19 +101,19 @@
         }
     }
 
-    async function fetchAwal() {
-        try {
-            const response = await fetch(apiUrl);
-            const data = await response.json(); 
+    // async function fetchAwal() {
+    //     try {
+    //         const response = await fetch(apiUrl);
+    //         const data = await response.json(); 
 
-            updateTampilan(data.antrean_sekarang); 
-        } catch (error) {
-            console.error('Gagal mengambil data awal:', error);
-            document.getElementById('display-antrean-sekarang').innerText = 'Error';
-        }
-    }
+    //         updateTampilan(data.antrean_sekarang); 
+    //     } catch (error) {
+    //         console.error('Gagal mengambil data awal:', error);
+    //         document.getElementById('display-antrean-sekarang').innerText = 'Error';
+    //     }
+    // }
 
-    document.addEventListener('DOMContentLoaded', fetchAwal);
+    // document.addEventListener('DOMContentLoaded', fetchAwal);
 
     console.log("BELUM")
 

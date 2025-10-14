@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css')}}">
+
+    @vite('resources/js/app.js')
 </head>
 
 <body>
