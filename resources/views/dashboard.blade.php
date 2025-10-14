@@ -76,7 +76,7 @@
     </section>
 </div>
 @endsection
-@push('script')
+@push('scripts')
 <script>
     // const apiUrl = 'https://operator-production-6d52.up.railway.app/api/antrean-terkini';
 
@@ -115,14 +115,12 @@
 
     // document.addEventListener('DOMContentLoaded', fetchAwal);
 
-    console.log("BELUM")
-
     window.Echo.channel('antrean-display-channel')
         .listen('UpdateDisplayAntrean', (event) => { 
             console.log('Update antrean diterima:', event);
             console.log("DAPAT NIIIIIII")
 
-            const antreanData = event.dataAntreanTerkini;
+            const antreanData = event.antrean;
 
             updateTampilan(event.antrean); 
 

@@ -17,8 +17,6 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css')}}">
-
-    @vite('resources/js/app.js')
 </head>
 
 <body>
@@ -52,7 +50,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- AdminLTE for demo purposes -->
     <!-- Page specific script -->
-    @stack('script')
+    @vite('resources/js/app.js')
+    @stack('scripts')
 </body>
 
 </html>
