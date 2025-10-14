@@ -76,7 +76,7 @@
     </section>
 </div>
 @endsection
-@push('scripts')
+@push('script')
 <script>
     const apiUrl = 'https://operator-production-6d52.up.railway.app/api/antrean-terkini';
 
