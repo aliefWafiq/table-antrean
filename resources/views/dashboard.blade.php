@@ -79,53 +79,54 @@
 @push('scripts')
 <script>
     // const apiUrl = 'https://operator-production-6d52.up.railway.app/api/antrean-terkini';
+    document.addEventListener('DOMContentLoaded', function() {
+        function updateTampilan(antreanSekarang) {
+            const displayNomorSekarang = document.getElementById('display-antrean-sekarang');
+            const tabelBody = document.getElementById('tabel-antrean');
 
-    function updateTampilan(antreanSekarang) {
-        const displayNomorSekarang = document.getElementById('display-antrean-sekarang');
-        const tabelBody = document.getElementById('tabel-antrean');
-
-        const barisAktifSebelumnya = tabelBody.querySelector('tr.table-success');
-        if (barisAktifSebelumnya) {
-            barisAktifSebelumnya.classList.remove('table-success');
-        }
-
-        if (antreanSekarang) {
-            displayNomorSekarang.innerText = antreanSekarang.tiketAntrean;
-
-            const barisAktifSekarang = document.getElementById('antrean-' + antreanSekarang.id);
-            if (barisAktifSekarang) {
-                barisAktifSekarang.classList.add('table-success');
+            const barisAktifSebelumnya = tabelBody.querySelector('tr.table-success');
+            if (barisAktifSebelumnya) {
+                barisAktifSebelumnya.classList.remove('table-success');
             }
-        } else {
-            displayNomorSekarang.innerText = '---';
+
+            if (antreanSekarang) {
+                displayNomorSekarang.innerText = antreanSekarang.tiketAntrean;
+
+                const barisAktifSekarang = document.getElementById('antrean-' + antreanSekarang.id);
+                if (barisAktifSekarang) {
+                    barisAktifSekarang.classList.add('table-success');
+                }
+            } else {
+                displayNomorSekarang.innerText = '---';
+            }
         }
-    }
 
-    // async function fetchAwal() {
-    //     try {
-    //         const response = await fetch(apiUrl);
-    //         const data = await response.json(); 
+        // async function fetchAwal() {
+        //     try {
+        //         const response = await fetch(apiUrl);
+        //         const data = await response.json(); 
 
-    //         updateTampilan(data.antrean_sekarang); 
-    //     } catch (error) {
-    //         console.error('Gagal mengambil data awal:', error);
-    //         document.getElementById('display-antrean-sekarang').innerText = 'Error';
-    //     }
-    // }
+        //         updateTampilan(data.antrean_sekarang); 
+        //     } catch (error) {
+        //         console.error('Gagal mengambil data awal:', error);
+        //         document.getElementById('display-antrean-sekarang').innerText = 'Error';
+        //     }
+        // }
 
-    // document.addEventListener('DOMContentLoaded', fetchAwal);
+        // document.addEventListener('DOMContentLoaded', fetchAwal);
 
-    window.Echo.channel('antrean-display-channel')
-        .listen('UpdateDisplayAntrean', (event) => { 
-            console.log('Update antrean diterima:', event);
-            console.log("DAPAT NIIIIIII")
+        window.Echo.channel('antrean-display-channel')
+            .listen('UpdateDisplayAntrean', (event) => {
+                console.log('Update antrean diterima:', event);
+                console.log("DAPAT NIIIIIII")
 
-            const antreanData = event.antrean;
+                const antreanData = event.antrean;
 
-            updateTampilan(event.antrean); 
+                updateTampilan(event.antrean);
 
-            // const audio = new Audio('/suara/notifikasi.mp3');
-            // audio.play();
-        });
+                // const audio = new Audio('/suara/notifikasi.mp3');
+                // audio.play();
+            });
+    })
 </script>
 @endpush
