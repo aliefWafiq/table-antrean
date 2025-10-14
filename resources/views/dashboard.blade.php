@@ -1,22 +1,6 @@
 @extends('layout.main')
 @section('content')
 <div class="p-5">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>List Antrean</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Dahsboard</a></li>
-                        <li class="breadcrumb-item active">List Antrean</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="content">
         <div class="container-fluid">
 
@@ -102,15 +86,9 @@
 
         window.Echo.channel('antrean-display-channel')
             .listen('UpdateDisplayAntrean', (event) => {
-                console.log('Update antrean diterima:', event);
-                console.log("DAPAT NIIIIIII")
-
                 const antreanData = event.dataAntreanTerkini;
 
                 updateTampilan(event.dataAntreanTerkini);
-
-                // const audio = new Audio('/suara/notifikasi.mp3');
-                // audio.play();
             });
     })
 </script>
