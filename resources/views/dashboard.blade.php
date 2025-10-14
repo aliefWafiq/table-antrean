@@ -115,9 +115,12 @@
 
     document.addEventListener('DOMContentLoaded', fetchAwal);
 
+    onsole.log("BELUM")
+
     window.Echo.channel('antrean-display-channel')
         .listen('UpdateDisplayAntrean', (event) => { 
             console.log('Update antrean diterima:', event);
+            console.log("DAPAT NIIIIIII")
 
             const antreanData = event.dataAntreanTerkini;
 
