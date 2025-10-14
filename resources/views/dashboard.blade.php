@@ -115,7 +115,7 @@
 
     document.addEventListener('DOMContentLoaded', fetchAwal);
 
-    onsole.log("BELUM")
+    console.log("BELUM")
 
     window.Echo.channel('antrean-display-channel')
         .listen('UpdateDisplayAntrean', (event) => { 
