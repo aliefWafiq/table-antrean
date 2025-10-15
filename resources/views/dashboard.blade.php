@@ -19,6 +19,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
+                                        <th>Nama Lengkap</th>
                                         <th>Nomor Perkara</th>
                                         <th>Tiket Antrean</th>
                                         <th>Jam Sidang</th>
@@ -29,6 +30,7 @@
                                     @foreach ($data as $x)
                                     <tr id="antrean-{{ $x->id }}" data-tanggal="{{ \Carbon\Carbon::parse($x->tanggal_sidang)->format('Y-m-d') }}" class="{{ ($antreanSekarang && $antreanSekarang->id == $x->id) ? 'table-success' : '' }}">
                                         <td class="text-center py-3">{{ $loop->iteration }}</td>
+                                        <td class="py-3">{{ $x->namaLengkap }}</td>
                                         <td class="py-3">{{ $x->noPerkara }}</td>
                                         <td class="py-3">{{ $x->tiketAntrean }}</td>
                                         <td class="py-3">{{ \Carbon\Carbon::parse($x->jam_perkiraan)->format('H:i') }}</td>
