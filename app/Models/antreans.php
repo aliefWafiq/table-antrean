@@ -17,6 +17,7 @@ class antreans extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id_perkara',
         'namaLengkap',
         'nomorHp',
         'password',
@@ -50,5 +51,10 @@ class antreans extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function perkara()
+    {
+        return $this->belongsTo(perkara::class, 'id_perkara');
     }
 }

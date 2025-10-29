@@ -30,7 +30,11 @@
                                     @foreach ($data as $x)
                                     <tr id="antrean-{{ $x->id }}" data-tanggal="{{ \Carbon\Carbon::parse($x->tanggal_sidang)->format('Y-m-d') }}" class="{{ ($antreanSekarang && $antreanSekarang->id == $x->id) ? 'table-success' : '' }}">
                                         <td class="text-center py-3">{{ $loop->iteration }}</td>
+                                        @if ($x->perkara && $x->perkara->tampilkan_nama != 'Tampilkan')
+                                        <td class="py-3">Tidak dipublikasikan</td>
+                                        @else
                                         <td class="py-3">{{ $x->namaLengkap }}</td>
+                                        @endif
                                         <td class="py-3">{{ $x->noPerkara }}</td>
                                         <td class="py-3">{{ $x->tiketAntrean }}</td>
                                         <td class="py-3">{{ \Carbon\Carbon::parse($x->jam_perkiraan)->format('H:i') }}</td>
