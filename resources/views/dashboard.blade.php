@@ -70,12 +70,9 @@
             }
         }
 
-        window.Echo.channel('antrean-display-channel')
-            .listen('UpdateDisplayAntrean', (event) => {
-                const antreanData = event.dataAntreanTerkini;
-
-                updateTampilan(event.dataAntreanTerkini);
-            });
+        window.Echo.channel('antrean-display-channel').listen('UpdateDisplayAntrean', (event) => {
+            updateTampilan(event.dataAntreanTerkini);
+        });
     })
 </script>
 @endpush
