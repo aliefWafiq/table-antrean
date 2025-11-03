@@ -10,7 +10,7 @@
                             <div class="d-flex flex-column flex-lg-row align-items-center">
                                 <div class="col-12 col-sm-8 py-2 d-flex flex-column flex-lg-row">
                                     <span class="card-title">Daftar Perkara Hari Ini</span>
-                                    <span class="card-title mx-lg-2">{{ \Carbon\Carbon::parse(now())->format('d F Y') }}</span>
+                                    <span class="card-title mx-lg-2">{{ now()->format('d F Y') }}</span>
                                 </div>
                             </div>
                         </div>
